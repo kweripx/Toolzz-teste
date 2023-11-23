@@ -4,7 +4,7 @@ import { createUser, update, getAll, getUserById, deleteUser } from '../../domai
 const router = express.Router();
 
 router.get('/:id', async (req, res) => {
-  const user = await getUserById(prismaUserRepository)(parseInt(req.params.id));
+  const user = await getUserById(prismaUserRepository)(req.params.id);
   res.json(user);
 });
 
@@ -19,12 +19,12 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  const updateUser = await update(prismaUserRepository)(parseInt(req.params.id), req.body);
+  const updateUser = await update(prismaUserRepository)(req.params.id, req.body);
   return res.json(updateUser);
 });
 
 router.delete('/:id', async (req, res) => {
-  const deleteUserById = await deleteUser(prismaUserRepository)(parseInt(req.params.id));
+  const deleteUserById = await deleteUser(prismaUserRepository)(req.params.id);
   return res.json(deleteUserById);
  });
 
