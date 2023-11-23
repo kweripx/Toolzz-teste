@@ -1,5 +1,5 @@
 import express from 'express';
-import userController from './src/presentation/userController';
+import userController from './application/user/userController';
 
 const app = express();
 app.use('/users', userController);
