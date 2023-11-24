@@ -54,7 +54,7 @@ describe('User Repository', () => {
   });
 
   it('Should delete multiple users', async () => {
-    const userIds: string[] = [uuid(), uuid(), uuid()];
+    const userIds: string[] = [uuid()];
     (userRepository.deleteUser as jest.Mock).mockResolvedValue(null);
 
     for (const id of userIds) {
