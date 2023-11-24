@@ -1,0 +1,17 @@
+{
+  "entryFile": "src/app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/application/user/*.ts"],
+  "spec": {
+    "outputDirectory": "./dist",
+    "host": "localhost:3000",
+    "specVersion": 3
+  },
+  "routes": {
+    "middleware": "express",
+    "routesDir": "./src/routes"
+  },
+  "compilerOptions": {
+    "strictNullChecks": true
+  }
+}

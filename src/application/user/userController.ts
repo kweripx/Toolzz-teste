@@ -1,35 +1,33 @@
-import express from 'express';
+import { Route, Tags, Post, Body, Get, Path, Put, Delete, SuccessResponse } from 'tsoa';
 import { prismaUserRepository } from '../../infrastructure/prismaUserRepository';
 import { createUser, update, getAll, getUserById, deleteUser } from '../../domain/user/services/userService';
-const router = express.Router();
-
-router.get('/:id', async (req, res) => {
-  try {
-    const user = await prismaUserRepository.findById(req.params.id);
-    return res.json(user);
-  } catch (err: any) {
-    return res.status(404).json({ error: err.message });
+import { User } from '../../domain/user/user';
+@Route('users')
+@Tags('User')
+export class UserController {
+  @Get('{userId}')
+  public async getUser(@Path() userId: string): Promise<User | null> {
+    return await prismaUserRepository.findById(userId);
   }
-});
 
-router.get('/', async (req, res) => {
-  const allUsers = await getAll(prismaUserRepository)();
-  res.json(allUsers);
-});
+  @Get('/')
+  public async getUsers(): Promise<User[]> {
+    return await getAll(prismaUserRepository)();
+  }
 
-router.post('/create', async (req, res) => {
- const create = await createUser(prismaUserRepository)(req.body);
- return res.status(200).json({ message: 'User created successfully', user: create });
-});
+  @SuccessResponse("201", "Created")
+  @Post('/create')
+  public async createUser(@Body() requestBody: User): Promise<User> {
+    return await createUser(prismaUserRepository)(requestBody);
+  }
 
-router.put('/:id', async (req, res) => {
-  const updateUser = await update(prismaUserRepository)(req.params.id, req.body);
-  return res.status(200).json({ message: 'User updated successfully', user: updateUser });
-});
+  @Put('{userId}')
+  public async updateUser(@Path() userId: string, @Body() requestBody: User): Promise<User> {
+    return await update(prismaUserRepository)(userId, requestBody);
+  }
 
-router.delete('/:id', async (req, res) => {
-  await prismaUserRepository.deleteUser(req.params.id);
-  return res.status(204).send();
- });
-
-export default router;
+  @Delete('{userId}')
+  public async deleteUser(@Path() userId: string): Promise<void> {
+    await prismaUserRepository.deleteUser(userId);
+  }
+}
