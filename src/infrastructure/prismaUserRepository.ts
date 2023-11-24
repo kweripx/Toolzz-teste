@@ -5,7 +5,11 @@ import { UUID } from 'crypto';
 
 export const prismaUserRepository: UserRepository = {
   async create(user: User): Promise<User> {
-    const newUser = await new PrismaClient().user.create({ data: user });
+    const prisma = new PrismaClient();
+    if (!user.name || !user.email) {
+      throw new Error('Name and email are required');
+    }
+    const newUser = await prisma.user.create({ data: { ...user } });
     return { id: newUser.id as UUID, name: newUser.name, email: newUser.email };
   },
   async findById(id: string): Promise<User> {
