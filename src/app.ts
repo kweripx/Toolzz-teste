@@ -1,5 +1,5 @@
 import express, {json, urlencoded, Response as ExResponse, Request as ExRequest}from "express";
-import { RegisterRoutes } from "./routes/routes";
+import { RegisterRoutes } from "./presentation/routes/routes";
 import swaggerUi from "swagger-ui-express";
 
 export const app = express();

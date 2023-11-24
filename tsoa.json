@@ -9,7 +9,7 @@
   },
   "routes": {
     "middleware": "express",
-    "routesDir": "./src/routes"
+    "routesDir": "./src/presentation/routes"
   },
   "compilerOptions": {
     "strictNullChecks": true
