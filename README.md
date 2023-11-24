@@ -40,6 +40,9 @@ This project is a Node.js application using Prisma, Express, and TypeScript.
 
 2. Apply database migrations:
     ```bash
+    # before apply migration run
+    npm run migrate:reset
+    # now run migrate:dev
     npm run migrate:dev
     ```
 
