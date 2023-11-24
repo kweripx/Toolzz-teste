@@ -7,13 +7,11 @@
     "build": "prisma generate && tsoa spec-and-routes && tsc",
     "start": "ts-node src/infrastructure/server/server.ts",
     "test": "TEST=true jest",
-    "test:watch": "TEST=true jest --watch",
     "postgres:start": "docker-compose up -d",
     "db:push": "prisma db push --preview-feature",
     "migrate:reset": "prisma migrate reset",
     "migrate:create": "prisma migrate dev --create-only",
-    "migrate:dev": "prisma migrate dev",
-    "prisma:generate": "prisma generate"
+    "migrate:dev": "prisma migrate dev"
   },
   "keywords": [],
   "author": "",
